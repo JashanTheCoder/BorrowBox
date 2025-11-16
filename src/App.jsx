@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
@@ -8,7 +9,7 @@ import AddRequestPage from './pages/AddRequestPage';
 import RequestsPage from './pages/RequestsPage';
 import ProfilePage from './pages/ProfilePage';
 import LoadingSpinner from './components/LoadingSpinner';
-// import Navbar from './components/Navbar';
+import ChatPage from './pages/ChatPage'; // ✔ only once
 
 /**
  * Main App component with routing
@@ -24,7 +25,7 @@ function App() {
 	return (
 		<div className='App'>
 			<Routes>
-				{/* Public routes */}
+				{/* Public Routes */}
 				<Route
 					path='/login'
 					element={user ? <Navigate to='/main' replace /> : <LoginPage />}
@@ -34,7 +35,7 @@ function App() {
 					element={user ? <Navigate to='/main' replace /> : <SignupPage />}
 				/>
 
-				{/* Protected routes */}
+				{/* Protected Routes */}
 				<Route
 					path='/main'
 					element={user ? <MainPage /> : <Navigate to='/login' replace />}
@@ -50,6 +51,16 @@ function App() {
 				<Route
 					path='/profile'
 					element={user ? <ProfilePage /> : <Navigate to='/login' replace />}
+				/>
+
+				{/* Chat Routes */}
+				<Route
+					path='/chat'
+					element={user ? <ChatPage /> : <Navigate to='/login' replace />}
+				/>
+				<Route
+					path='/chat/:requestId'
+					element={user ? <ChatPage /> : <Navigate to='/login' replace />}
 				/>
 
 				{/* Default redirect */}

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // Set the API base URL
-const API_BASE_URL = 'https://borrow-box-five.vercel.app/api';
+// const API_BASE_URL = 'https://borrow-box-five.vercel.app/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 // Create axios instance with base URL
 const api = axios.create({
