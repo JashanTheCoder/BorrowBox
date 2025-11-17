@@ -1,21 +1,15 @@
-const ChatMessage = ({ text, sender, isMine }) => {
+const ChatMessage = ({ text, sender, isMine, createdAt }) => {
+	const ts = createdAt ? new Date(createdAt).toLocaleTimeString() : '';
+
 	return (
-		<div
-			style={{
-				textAlign: isMine ? 'right' : 'left',
-				margin: '8px 0',
-			}}
-		>
-			<p
-				style={{
-					display: 'inline-block',
-					padding: '10px 14px',
-					borderRadius: '10px',
-					background: isMine ? '#DCF8C6' : '#F1F1F1',
-				}}
-			>
-				<strong>{sender}:</strong> {text}
-			</p>
+		<div className={`message-row ${isMine ? 'mine' : 'theirs'}`}>
+			<div className='bubble'>
+				<div>
+					<strong className='me-0'>{sender}</strong>
+				</div>
+				<div style={{ marginTop: 6 }}>{text}</div>
+				{ts && <div className='message-meta'>{ts}</div>}
+			</div>
 		</div>
 	);
 };

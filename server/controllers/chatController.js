@@ -5,7 +5,12 @@ export const sendMessage = async (req, res) => {
 		const { requestId, message } = req.body;
 		const senderId = req.user.id;
 
-		const newMsg = await ChatMessage.create({ requestId, senderId, message });
+		let newMsg = await ChatMessage.create({ requestId, senderId, message });
+		// populate sender details before returning so clients have the name immediately
+		newMsg = await ChatMessage.findById(newMsg._id).populate(
+			'senderId',
+			'name'
+		);
 		res.json({ success: true, data: newMsg });
 	} catch (err) {
 		res.status(500).json({ success: false, error: err.message });
