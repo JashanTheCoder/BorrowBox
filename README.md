@@ -1,78 +1,91 @@
-📦 BorrowBox – Item, Guidance & Chat Request System
+# 📦 BorrowBox – Item, Guidance & Chat Request System
 
 A full-stack community platform where users can request items, seek guidance, chat in real time, and manage borrow interactions. BorrowBox connects people who need something with those who can provide it — quickly and conveniently.
 
-🚀 Tech Stack
-Frontend
+---
 
-React 18+
+## 🚀 Tech Stack
 
-React Router DOM
+### **Frontend**
+- React 18+
+- React Router DOM
+- Axios
+- Bootstrap 5
+- Lucide React
 
-Axios
+### **Backend**
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JWT Authentication
+- Bcrypt.js
+- Socket.io (real-time chat)
+- CORS
 
-Bootstrap 5
+### **Middlewares Used**
+- `auth.js` – JWT verification middleware
+- `errorHandler.js` – Centralized error handler
 
-Lucide React
+### **Database**
+- MongoDB Atlas (Cloud)
 
-Backend
+---
 
-Node.js + Express.js
+## ✨ Features
 
-MongoDB + Mongoose
+### 🔐 Authentication System
+- User signup and login using JWT
+- Password hashing with bcrypt
+- User details stored (name, gender, phone, area)
+- Protected backend routes using authentication middleware
 
-JWT Authentication
+---
 
-Bcrypt.js
+### 📋 Request Management
+- Create Item Requests (books, tools, electronics, etc.)
+- Create Guidance Requests (tutoring, skill help, advice, etc.)
+- Request flow: **Pending → Accepted → Completed**
+- View all requests or user-specific requests
+- Live status updates on each request card
 
-Socket.io (real-time chat)
+---
 
-CORS
+### 💬 Real-Time Chat System (WebSockets)
+- One-to-one chat between requester and provider
+- Built using Socket.io
+- Chat rooms created per request
+- Instant message delivery
+- All chat history saved in database
 
-Custom Middlewares Used
+---
 
-auth.js – JWT authentication middleware
+### ⭐ Rating System
+- Providers rate users after completing a request
+- Auto-calculated average rating
+- Full rating history available
+- "New User" badge for unrated users
 
-errorHandler.js – Centralized API error handler
+---
 
-Database
+### 👤 Profile Management
+- View and edit personal details
+- Shows user ratings and activity
+- Displays member-since date and area
 
-MongoDB Atlas (Cloud)
+---
 
-✨ Features
-🔐 Authentication System
+### 🔍 Search & Filters
+- Filter by **Item** or **Guidance**
+- Search across names, areas, items, and topics
+- Sort by rating, area, or recent activity
+- Real-time, responsive filtering
 
-User signup and login using JWT
+---
 
-Password hashing with bcrypt
+### 📱 Responsive UI
+- Mobile-first design
+- Bootstrap 5 responsive layout
+- Clean and intuitive UI for all devices
 
-User details stored: name, gender, phone, area
-
-Protected backend routes using authentication middleware
-
-📋 Request Management
-
-Create item requests (books, electronics, tools, etc.)
-
-Create guidance requests (tutoring, skill help, advice, etc.)
-
-Request flow: Pending → Accepted → Completed
-
-View all requests or only user-specific requests
-
-Live status updates on request cards
-
-💬 Real-Time Chat System (WebSockets)
-
-One-to-one chat between requester and provider
-
-Built using Socket.io
-
-Chat rooms created per request
-
-Messages instantly delivered and stored
-
-Chat history available anytime
 ## 🏗️ Project Structure
 
 ```
