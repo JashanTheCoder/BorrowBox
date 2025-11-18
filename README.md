@@ -1,109 +1,149 @@
-# 📦 BorrowBox - Item & Guidance Request System
+📦 BorrowBox – Item, Guidance & Chat Request System
 
-A full-stack web application that allows users to request and provide items or guidance within a community. Built with modern web technologies for a seamless user experience.
+A full-stack community platform where users can request items, seek guidance, chat in real time, and manage borrow interactions. BorrowBox connects people who need something with those who can provide it — quickly and conveniently.
 
-## 🚀 Tech Stack
+🚀 Tech Stack
+Frontend
 
-**Frontend:**
-- React 18+ (JavaScript)
-- React Router DOM for navigation
-- Bootstrap 5 for responsive UI
-- Lucide React for icons
-- Axios for API calls
+React 18+
 
-**Backend:**
-- Node.js with Express.js
-- MongoDB with Mongoose ODM
-- JWT authentication
-- Bcrypt.js for password hashing
-- CORS middleware
+React Router DOM
 
-**Database:**
-- MongoDB (Cloud)
+Axios
 
-## ✨ Features
+Bootstrap 5
 
-### 🔐 Authentication System
-- User registration with profile details (name, gender, phone, area)
-- Secure login/logout with JWT tokens
-- Email and password validation
+Lucide React
 
-### 📋 Request Management
-- **Item Requests**: Borrow physical items (books, tools, equipment)
-- **Guidance Requests**: Get help with topics (tutoring, advice, skills)
-- Create, view, and manage requests
-- Real-time status updates (Pending → Accepted → Completed)
+Backend
 
-### ⭐ Rating System
-- Providers can rate requestors after completion
-- Average rating calculation and display
-- "New User" badge for users without ratings
-- Detailed rating history with comments
+Node.js + Express.js
 
-### 👤 Profile Management
-- View and edit personal information
-- Area selection from predefined list
-- Rating summary and history
-- Member since date tracking
+MongoDB + Mongoose
 
-### 🔍 Advanced Filtering & Search
-- Filter by request type (Item/Guidance)
-- Search across names, areas, items, and topics
-- Sort by date, rating, or area
-- Real-time filtering results
+JWT Authentication
 
-### 📱 Responsive Design
-- Mobile-first approach
-- Bootstrap-powered responsive grid
-- Touch-friendly interface
-- Professional card-based layout
+Bcrypt.js
 
+Socket.io (real-time chat)
+
+CORS
+
+Custom Middlewares Used
+
+auth.js – JWT authentication middleware
+
+errorHandler.js – Centralized API error handler
+
+Database
+
+MongoDB Atlas (Cloud)
+
+✨ Features
+🔐 Authentication System
+
+User signup and login using JWT
+
+Password hashing with bcrypt
+
+User details stored: name, gender, phone, area
+
+Protected backend routes using authentication middleware
+
+📋 Request Management
+
+Create item requests (books, electronics, tools, etc.)
+
+Create guidance requests (tutoring, skill help, advice, etc.)
+
+Request flow: Pending → Accepted → Completed
+
+View all requests or only user-specific requests
+
+Live status updates on request cards
+
+💬 Real-Time Chat System (WebSockets)
+
+One-to-one chat between requester and provider
+
+Built using Socket.io
+
+Chat rooms created per request
+
+Messages instantly delivered and stored
+
+Chat history available anytime
 ## 🏗️ Project Structure
 
 ```
 borrowbox-system/
-├── src/                          # Frontend React application
-│   ├── components/               # Reusable UI components
-│   │   ├── Navbar.jsx
-│   │   ├── RequestCard.jsx
-│   │   ├── LoadingSpinner.jsx
-│   │   └── RatingModal.jsx
-│   ├── pages/                    # Main application pages
-│   │   ├── LoginPage.jsx
-│   │   ├── SignupPage.jsx
-│   │   ├── MainPage.jsx
-│   │   ├── AddRequestPage.jsx
-│   │   ├── RequestsPage.jsx
-│   │   └── ProfilePage.jsx
-│   ├── context/                  # React Context providers
-│   │   └── AuthContext.jsx
-│   ├── services/                 # API service layer
-│   │   └── api.js
-│   ├── App.jsx                   # Main app component
-│   └── main.jsx                  # App entry point
-├── server/                       # Backend Node.js application
-│   ├── models/                   # Mongoose schemas
-│   │   ├── User.js
-│   │   ├── Request.js
-│   │   └── Rating.js
-│   ├── controllers/              # Business logic controllers
-│   │   ├── userController.js
-│   │   ├── requestController.js
-│   │   └── ratingController.js
-│   ├── routes/                   # API route definitions
-│   │   ├── userRoutes.js
-│   │   ├── requestRoutes.js
-│   │   └── ratingRoutes.js
-│   ├── middlewares/              # Custom middleware
-│   │   ├── auth.js
-│   │   └── errorHandler.js
-│   ├── config/                   # Configuration files
-│   │   └── database.js
-│   └── index.js                  # Server entry point
-├── .env                          # Environment variables
-├── package.json                  # Dependencies and scripts
-└── README.md                     # Project documentation
-```
+├── server/                               # Backend (Node.js + Express + MongoDB)
+│   ├── config/                           # Configuration files (DB, etc.)
+│   │   └── index.js                      # MongoDB connection setup
+│   │
+│   ├── controllers/                      # Controllers: handle request logic
+│   │   ├── chatController.js             # Chat creation, fetch, message handling
+│   │   ├── ratingController.js           # Rating create/fetch logic
+│   │   ├── requestController.js          # Borrow requests CRUD + status updates
+│   │   └── userController.js             # Signup, login, profile, auth actions
+│   │
+│   ├── middlewares/                      # Middleware for auth & error handling
+│   │   ├── auth.js                       # JWT auth check, protects routes
+│   │   └── errorHandler.js               # Global error handler for API
+│   │
+│   ├── models/                           # Mongoose models (database schemas)
+│   │   ├── Chat.js                       # Chat room schema between two users
+│   │   ├── ChatMessage.js                # Individual messages schema
+│   │   ├── Rating.js                     # Rating given by a user to another
+│   │   ├── Request.js                    # Borrow request schema (item, status)
+│   │   └── User.js                       # User account schema
+│   │
+│   ├── routes/                           # All API route definitions
+│   │   ├── chatRoutes.js                 # Chat-related API endpoints
+│   │   ├── ratingRoutes.js               # Rating-related API endpoints
+│   │   ├── requestRoutes.js              # Borrow request endpoints
+│   │   └── userRoutes.js                 # Authentication + user routes
+│   │
+│   ├── websocket/                        # WebSocket (Socket.io) real-time logic
+│   │   ├── chatSocket.js                 # Socket handlers for chat messages
+│   │   └── index.js                      # Socket.io server integration
+│   │
+│   └── index.js                          # Main Express server entry point
+│
+├── src/                                  # *****Frontend (React + Vite)******
+│   ├── components/                       # Reusable UI components
+│   │   ├── ChatMessage.jsx               # Single chat bubble component
+│   │   ├── LoadingSpinner.jsx            # Loader animation component
+│   │   ├── Navbar.jsx                    # Top navigation bar
+│   │   ├── RatingModal.jsx               # Popup modal for giving ratings
+│   │   └── RequestCard.jsx               # UI card for each posted request
+│   │
+│   ├── context/                          # React Context API
+│   │   └── AuthContext.jsx               # Stores user auth state globally
+│   │
+│   ├── pages/                            # All application pages/screens
+│   │   ├── AddRequestPage.jsx            # Form to create a new borrow request
+│   │   ├── ChatListPage.jsx              # List of chats for the logged-in user
+│   │   ├── ChatPage.jsx                  # Main chat window with messages
+│   │   ├── LoginPage.jsx                 # User login page
+│   │   ├── MainPage.jsx                  # Homepage after logging in
+│   │   ├── ProfilePage.jsx               # User profile + rating info
+│   │   ├── RequestsPage.jsx              # View all available requests
+│   │   └── SignupPage.jsx                # User signup/registration page
+│   │
+│   ├── services/                         # API calls to backend
+│   │   └── api.js                        # Axios instance + all API endpoints
+│   │
+│   ├── chat.css                          # Chat UI styling
+│   ├── App.jsx                           # Main component with routes
+│   ├── index.css                         # Global styling
+│   └── main.jsx                          # React entry point (Vite)
+│
+├── .env                                  # Environment variables
+├── .gitignore                            # Files ignored by Git
+├── index.html                            # Main HTML template (Vite)
+├── package.json                          # Project dependencies + scripts
+└── package-lock.json                     # Lock file for exact dependency versions
 
 ## 🛠️ Setup Instructions
 
