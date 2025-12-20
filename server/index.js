@@ -22,6 +22,7 @@ const app = express();
 const allowedOrigins = [
 	'http://localhost:5173',
 	'https://borrow-box-five.vercel.app',
+	'https://borrowbox-plum.vercel.app',
 	process.env.CLIENT_URL
 ].filter(Boolean);
 
