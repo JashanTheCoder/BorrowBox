@@ -21,7 +21,7 @@ const app = express();
 // 1️⃣ CORS **BEFORE ANY ROUTES**
 app.use(
 	cors({
-		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app'],
+		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app', process.env.CLIENT_URL],
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 		credentials: true,
 	})
@@ -39,7 +39,7 @@ const httpServer = createServer(app);
 // 4️⃣ WebSocket server CORS
 const io = new Server(httpServer, {
 	cors: {
-		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app'],
+		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app', process.env.CLIENT_URL],
 		methods: ['GET', 'POST'],
 		credentials: true,
 	},
