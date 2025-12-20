@@ -19,9 +19,22 @@ connectDB();
 const app = express();
 
 // 1️⃣ CORS **BEFORE ANY ROUTES**
+const allowedOrigins = [
+	'http://localhost:5173',
+	'https://borrow-box-five.vercel.app',
+	process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(
 	cors({
-		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app', process.env.CLIENT_URL],
+		origin: (origin, callback) => {
+			if (!origin || allowedOrigins.includes(origin)) {
+				callback(null, true);
+			} else {
+				console.log('CORS blocked origin:', origin);
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 		credentials: true,
 	})
@@ -39,7 +52,7 @@ const httpServer = createServer(app);
 // 4️⃣ WebSocket server CORS
 const io = new Server(httpServer, {
 	cors: {
-		origin: ['http://localhost:5173', 'https://borrow-box-five.vercel.app', process.env.CLIENT_URL],
+		origin: allowedOrigins,
 		methods: ['GET', 'POST'],
 		credentials: true,
 	},
